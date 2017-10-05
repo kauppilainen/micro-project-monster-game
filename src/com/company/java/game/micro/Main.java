@@ -11,13 +11,9 @@ import java.nio.charset.Charset;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        // Instantiate objects
-        // New player
-        // New enemies
-        // New lanterna object
-
-        GamePlay startGame;
 
 
+        GamePlay game = new GamePlay();
+        game.startGame();
     }
 }
