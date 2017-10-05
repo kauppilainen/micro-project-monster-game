@@ -3,15 +3,17 @@ package com.company.java.game.micro;
 
 public class Player {
 
-    private int x, y;
+    private int x;
+    private int y;
+
     public char character = 'O';
 
     public Player(int x, int y) {
-//        this.x=x;
-//        this.y=y;
         setY(y);
         setX(x);
     }
+
+    // Getters and setters
 
     public char getCharacter() {
         return character;
@@ -34,15 +36,9 @@ public class Player {
     }
 
     public void setY(int y) {
+
         this.y = y;
     }
-
-
-    // How to walk around?
-
-    // Constructor (position)
-
-
 }
 
 

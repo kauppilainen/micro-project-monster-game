@@ -35,6 +35,7 @@ public class GamePlay {
         // Get obstacle position (IF WE'RE GOING TO USE OBSTACLES)
 
         while (true) {
+            //region Dumma kommentarer
             // Denna del blir spelarens, fiende och obstacles koordinater
 
             // New position and old position?
@@ -47,60 +48,32 @@ public class GamePlay {
 
             // OBS! DENNA IDÉ KANSKE INTE FUNKAR. JAG SAKNAR FÖRSTÅELSE
             // Värdet på boarden
+            //endregion
 
-            //Draw the board on the screen
+            //Draw the screen black
             for (int i = 0; i < board.length; i++) {            // loop for y-coordinate
                 for (int j = 0; j < board[0].length; j++) {     // loop for x-coordinate
+                    terminal.moveCursor(j, i);  // (x, y)
+                    int color = 0;                                      // Denna färg är vit
+                    terminal.applyForegroundColor(color, color, color); // R,G,B
+                    terminal.putCharacter(block);            // Enemy character, not chosen yet.
 
-                    // Player position code
-                    if (j == player.getX() && i == player.getY()) {
-                        terminal.moveCursor(j, i);  // (x, y)
-                        int color = 255;                                    // Denna färg är vit
-                        terminal.applyForegroundColor(color, color, color); // R,G,B
-                        terminal.putCharacter(player.getCharacter());            // Enemy character, not chosen yet.
-                    } else {
-                        terminal.moveCursor(j, i);  // (x, y)
-                        int color = 0;                                      // Denna färg är vit
-                        terminal.applyForegroundColor(color, color, color); // R,G,B
-                        terminal.putCharacter(block);            // Enemy character, not chosen yet.
-                    }
-                    // Enemy position code
-                    for (int k = 0; k < enemy.length; k++) {
-
-                        if (j == enemy[k].getX() && i == enemy[k].getY()) {
-                            // Draw enemy character
-                            terminal.moveCursor(j, i);  // (x, y)
-                            int color = 255;                                    // Denna färg är vit
-                            terminal.applyForegroundColor(color, color, color); // R,G,B
-                            terminal.putCharacter(enemy1.enemyChar);                      // Enemy character, not chosen yet.
-                            terminal.putCharacter(enemy2.enemyChar);                      // Enemy character, not chosen yet.
-
-                        } else {
-                            if (j == player.getX() && i == player.getY()) {
-                                break;
-                            }
-                            // Make backgroundcolor
-                            terminal.moveCursor(j, i);
-                            int color = 0;
-                            terminal.applyForegroundColor(color, color, color);
-                            terminal.putCharacter(block);
-                        }
-                    }
-
-                /*
-                    if(notPosition of player och enemies)
-                        board
-                    else{
-                        is this player or enemy position
-                */
                 }
+            }
 
-                /*
-                    terminal.moveCursor(j, i); // (x, y)
-                    int color = board[i][j];
-                    terminal.applyForegroundColor(color, color, color); //red, green, blue
-                    terminal.putCharacter('\u2588');
-                */
+            // Draw player and enemies
+            // Player
+            terminal.moveCursor(player.getX(), player.getY());
+            int color = 255;                                    // Denna färg är vit
+            terminal.applyForegroundColor(color, color, color); // R,G,B
+            terminal.putCharacter(player.getCharacter());
+
+            // Monster
+            for (int i = 0; i < enemy.length; i++) {
+                terminal.moveCursor(enemy[i].getX(), enemy[i].getY());  // (x, y)
+                color = 255;                                      // Denna färg är vit
+                terminal.applyForegroundColor(color, color, color); // R,G,B
+                terminal.putCharacter(enemy[i].enemyChar);
             }
 
             //Wait for a key to be pressed
@@ -117,47 +90,44 @@ public class GamePlay {
                             // player.getPosition();
                             System.out.println("left");
                             player.setX(player.getX() - 1);
-                            enemy1.getX();
-                            enemy2.getX();
+//                            enemy1.getX();
+//                            enemy2.getX();
                             break;
                         case ArrowDown:
                             System.out.println("down");
                             player.setY(player.getY() + 1);
-                            enemy1.getY();
-                            enemy2.getY();
+//                            enemy1.getY();
+//                            enemy2.getY();
                             break;
                         case ArrowRight:
                             System.out.println("right");
                             player.setX(player.getX() + 1);
-                            enemy1.getX();
-                            enemy2.getX();
+//                            enemy1.getX();
+//                            enemy2.getX();
                             break;
                         case ArrowUp:
                             System.out.println("up");
                             player.setY(player.getY() - 1);
-                            enemy1.getY();
-                            enemy2.getY();
+//                            enemy1.getY();
+//                            enemy2.getY();
 
                             break;
                     }
                 }
-
                 Thread.sleep(5);
-
             }
             while (key == null);
             enemy1.uppdatePosition();
             enemy2.uppdatePosition();
-            if (enemy1.getX()==player.getX() && enemy1.getY()==player.getY()&&
-            enemy2.getX()==player.getX() && enemy2.getY()==player.getY() ){
+            if (enemy1.getX() == player.getX() && enemy1.getY() == player.getY() ||
+                    enemy2.getX() == player.getX() && enemy2.getY() == player.getY()) {
 
                 terminal.exitPrivateMode();
-                JOptionPane.showMessageDialog(null, "GAME OVER BIATCH!!!!!!!!!");
-               int game= JOptionPane.showConfirmDialog(null,"Do you want to play again?");
-               if (game == 0){
-
-                   Main main = new Main();
-               }
+                JOptionPane.showMessageDialog(null, "GAME OVER");
+                int game = JOptionPane.showConfirmDialog(null, "Do you want to play again?");
+                if (game == 0) {
+                    Main main = new Main();
+                }
             }
         }
     }

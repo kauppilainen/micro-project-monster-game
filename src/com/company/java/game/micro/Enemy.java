@@ -41,7 +41,6 @@ public class Enemy {
         }
     }
 
-
     public int getY() {
         return y;
     }
@@ -53,6 +52,4 @@ public class Enemy {
             this.y = y + 1;
         }
     }
-
-
 }
