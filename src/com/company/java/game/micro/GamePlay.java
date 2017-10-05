@@ -86,78 +86,58 @@ public class GamePlay {
                             terminal.putCharacter(block);
                         }
                     }
+                    Key key;
+                    do {
+                        key = terminal.readInput();
 
-                /*
-                    if(notPosition of player och enemies)
-                        board
-                    else{
-                        is this player or enemy position
-                */
-                }
+                        if (key != null) {
+                            switch (key.getKind()) {
+                                case ArrowLeft:
+                                    // player.getPosition();
+                                    System.out.println("left");
+                                    player.setX(player.getX() - 1);
+                                    enemy1.getX();
+                                    enemy2.getX();
+                                    break;
+                                case ArrowDown:
+                                    System.out.println("down");
+                                    player.setY(player.getY() + 1);
+                                    enemy1.getY();
+                                    enemy2.getY();
+                                    break;
+                                case ArrowRight:
+                                    System.out.println("right");
+                                    player.setX(player.getX() + 1);
+                                    enemy1.getX();
+                                    enemy2.getX();
+                                    break;
+                                case ArrowUp:
+                                    System.out.println("up");
+                                    player.setY(player.getY() - 1);
+                                    enemy1.getY();
+                                    enemy2.getY();
+                                    break;
+                            }
+                        }
 
-                /*
-                    terminal.moveCursor(j, i); // (x, y)
-                    int color = board[i][j];
-                    terminal.applyForegroundColor(color, color, color); //red, green, blue
-                    terminal.putCharacter('\u2588');
-                */
-            }
+                        Thread.sleep(5);
+                    }
+                    while (key == null);
+                    enemy1.uppdatePosition();
+                    enemy2.uppdatePosition();
+                    if (enemy1.getX() == player.getX() && enemy1.getY() == player.getY() &&
+                            enemy2.getX() == player.getX() && enemy2.getY() == player.getY()) {
 
-            //Wait for a key to be pressed
-            // This will be changed to arrow keys and cases of what arrow
-
-            Key key;
-
-            do {
-                key = terminal.readInput();
-
-                if (key != null) {
-                    switch (key.getKind()) {
-                        case ArrowLeft:
-                            // player.getPosition();
-                            System.out.println("left");
-                            player.setX(player.getX() - 1);
-                            enemy1.getX();
-                            enemy2.getX();
-                            break;
-                        case ArrowDown:
-                            System.out.println("down");
-                            player.setY(player.getY() + 1);
-                            enemy1.getY();
-                            enemy2.getY();
-                            break;
-                        case ArrowRight:
-                            System.out.println("right");
-                            player.setX(player.getX() + 1);
-                            enemy1.getX();
-                            enemy2.getX();
-                            break;
-                        case ArrowUp:
-                            System.out.println("up");
-                            player.setY(player.getY() - 1);
-                            enemy1.getY();
-                            enemy2.getY();
-
-                            break;
+                        terminal.exitPrivateMode();
+                        JOptionPane.showMessageDialog(null, "GAME OVER BIATCH!!!!!!!!!");
+                        int game = JOptionPane.showConfirmDialog(null, "Do you want to play again?");
+                        if (game == 0) {
+                            startGame();
+                        } else if (game == 1) {
+                            terminal.exitPrivateMode();
+                        }
                     }
                 }
-
-                Thread.sleep(5);
-
-            }
-            while (key == null);
-            enemy1.uppdatePosition();
-            enemy2.uppdatePosition();
-            if (enemy1.getX()==player.getX() && enemy1.getY()==player.getY()&&
-            enemy2.getX()==player.getX() && enemy2.getY()==player.getY() ){
-
-                terminal.exitPrivateMode();
-                JOptionPane.showMessageDialog(null, "GAME OVER BIATCH!!!!!!!!!");
-               int game= JOptionPane.showConfirmDialog(null,"Do you want to play again?");
-               if (game == 0){
-
-                   Main main = new Main();
-               }
             }
         }
     }
