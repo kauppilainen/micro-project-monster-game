@@ -13,6 +13,8 @@ public class GamePlay {
     public void startGame() throws InterruptedException {
         Player player = new Player(10, 10);
         Enemy enemy1 = new Enemy(0, 0, ID.Enemy, player);
+        Enemy enemy2 = new Enemy(19, 19, ID.Enemy, player);
+
 
         // New terminal object
         Terminal terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF8"));
@@ -26,8 +28,9 @@ public class GamePlay {
         // Block character to draw if not player or enemy position
         char block = '\u2588';
 
-        Enemy[] enemy = new Enemy[1];
+        Enemy[] enemy = new Enemy[2];
         enemy[0] = enemy1;
+        enemy[1] = enemy2;
 
         // Get obstacle position (IF WE'RE GOING TO USE OBSTACLES)
 
@@ -70,6 +73,7 @@ public class GamePlay {
                             int color = 255;                                    // Denna färg är vit
                             terminal.applyForegroundColor(color, color, color); // R,G,B
                             terminal.putCharacter(enemy1.enemyChar);                      // Enemy character, not chosen yet.
+                            terminal.putCharacter(enemy2.enemyChar);                      // Enemy character, not chosen yet.
 
                         } else {
                             if (j == player.getX() && i == player.getY()) {
@@ -114,23 +118,25 @@ public class GamePlay {
                             System.out.println("left");
                             player.setX(player.getX() - 1);
                             enemy1.getX();
-
-
+                            enemy2.getX();
                             break;
                         case ArrowDown:
                             System.out.println("down");
                             player.setY(player.getY() + 1);
                             enemy1.getY();
+                            enemy2.getY();
                             break;
                         case ArrowRight:
                             System.out.println("right");
                             player.setX(player.getX() + 1);
                             enemy1.getX();
+                            enemy2.getX();
                             break;
                         case ArrowUp:
                             System.out.println("up");
                             player.setY(player.getY() - 1);
                             enemy1.getY();
+                            enemy2.getY();
 
                             break;
                     }
@@ -141,7 +147,9 @@ public class GamePlay {
             }
             while (key == null);
             enemy1.uppdatePosition();
-            if (enemy1.getX()==player.getX() && enemy1.getY()==player.getY()){
+            enemy2.uppdatePosition();
+            if (enemy1.getX()==player.getX() && enemy1.getY()==player.getY()&&
+            enemy2.getX()==player.getX() && enemy2.getY()==player.getY() ){
 
                 terminal.exitPrivateMode();
                 JOptionPane.showMessageDialog(null, "GAME OVER BIATCH!!!!!!!!!");
