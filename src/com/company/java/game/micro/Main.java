@@ -15,8 +15,9 @@ public class Main {
         // New player
         // New enemies
         // New lanterna object
+        GamePlay gamePlay = new GamePlay();
 
-        GamePlay startGame;
+        gamePlay.startGame ();
 
 
     }
