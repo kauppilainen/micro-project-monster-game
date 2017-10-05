@@ -145,6 +145,11 @@ public class GamePlay {
 
                 terminal.exitPrivateMode();
                 JOptionPane.showMessageDialog(null, "GAME OVER BIATCH!!!!!!!!!");
+               int game= JOptionPane.showConfirmDialog(null,"Do you want to play again?");
+               if (game == 0){
+
+                   Main main = new Main();
+               }
             }
         }
     }
