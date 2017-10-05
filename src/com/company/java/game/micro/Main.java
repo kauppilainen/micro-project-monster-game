@@ -11,8 +11,15 @@ import java.nio.charset.Charset;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        
-        GamePlay game = new GamePlay();
-        game.startGame();
+
+        int reply = JOptionPane.showConfirmDialog(null, "Vill du spela spel?", "Monster game", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            GamePlay game = new GamePlay();
+            game.startGame();
+        }
+        else {
+            System.exit(0);
+        }
+
     }
 }
