@@ -1,7 +1,6 @@
 package com.company.java.game.micro;
 
 import javax.swing.*;
-import java.nio.charset.Charset;
 
 public class Main {
 
