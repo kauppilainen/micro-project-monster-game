@@ -9,8 +9,8 @@ import java.nio.charset.Charset;
 
 public class Game {
 
-
     public void startGame() throws InterruptedException {
+        int points = 0;
         Player player = new Player(10, 10);
         Enemy enemy1 = new Enemy(0, 0, ID.Enemy, player);
         Enemy enemy2 = new Enemy(19, 19, ID.Enemy, player);
@@ -85,6 +85,7 @@ public class Game {
                 key = terminal.readInput();
 
                 if (key != null) {
+                    points += 3; // Increase score by 3 per movement
                     switch (key.getKind()) {
                         case ArrowLeft:
                             // player.getPosition();
@@ -115,19 +116,15 @@ public class Game {
                     }
                 }
                 Thread.sleep(5);
-            }
-            while (key == null);
+            } while (key == null);
+
             enemy1.uppdatePosition();
             enemy2.uppdatePosition();
             if (enemy1.getX() == player.getX() && enemy1.getY() == player.getY() ||
                     enemy2.getX() == player.getX() && enemy2.getY() == player.getY()) {
 
                 terminal.exitPrivateMode();
-                JOptionPane.showMessageDialog(null, "GAME OVER");
-                int game = JOptionPane.showConfirmDialog(null, "Do you want to play again?");
-                if (game == 0) {
-                    Main main = new Main();
-                }
+                JOptionPane.showMessageDialog(null, "GAME OVER\r\n Score: " + points);
             }
         }
     }
