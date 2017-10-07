@@ -8,7 +8,7 @@ public class Main {
 
         int reply = JOptionPane.showConfirmDialog(null, "Vill du spela spel?", "Monster game", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-            GamePlay game = new GamePlay();
+            Game game = new Game();
             game.startGame();
         }
         else {

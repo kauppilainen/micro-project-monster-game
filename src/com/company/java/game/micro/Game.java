@@ -7,7 +7,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import javax.swing.*;
 import java.nio.charset.Charset;
 
-public class GamePlay {
+public class Game {
 
 
     public void startGame() throws InterruptedException {
